@@ -16,7 +16,7 @@ The Snowflake MCP Server allows AI agents to securely retrieve data from Snowfla
 
 MCP Server on Snowflake simplifies the application architecture and eliminates the need for custom integrations. Enterprises can expedite delivery of generative AI applications with richer insights on a standards based architecture and a robust governance model with the Snowflake AI data cloud.
 
-![MCP](./Getting%20Started%20with%20Managed%20Snowflake%20MCP%20Server_files/mcp.png)
+![MCP](./mcp.png)
 
 ### Prerequisites
 
