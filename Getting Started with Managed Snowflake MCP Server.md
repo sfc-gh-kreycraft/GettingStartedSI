@@ -98,12 +98,28 @@ tools:
 $$;
 ```
 
+We need to enable a Network policy to allow testing of the environment.  Put the below into a Workspace and run.  It should show the MCP server is running.
+
+```sql
+USE ROLE ACCOUNTADMIN;
+-- Create a new policy that allows all traffic
+CREATE OR REPLACE NETWORK POLICY allow_all_policy
+  ALLOWED_IP_LIST = ('0.0.0.0/0')
+  COMMENT = 'Policy to allow all public IPv4 traffic';
+
+ALTER ACCOUNT SET NETWORK_POLICY = allow_all_policy;
+
+ALTER ACCOUNT UNSET NETWORK_POLICY;
+
+SHOW MCP SERVERS; 
+```
+
 Before proceeding, test the connection using `curl` to make sure your account URL/MCP server endpoint and PAT are correct.
 
-> **NOTE:** Replace `<YOUR-ORG-YOUR-ACCOUNT>` and `<YOUR-PAT-TOKEN>` with your values.  This will not work in our test environment due to Network policies.
+> **NOTE:** Replace `<YOUR-ORG-YOUR-ACCOUNT>` and `<YOUR-PAT-TOKEN>` with your values.  
 
 ```bash
-curl -X POST "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/databases/dash_db_si/schemas/data/mcp-servers/dash_mcp_server" \
+curl -X POST "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/databases/dash_db_si/schemas/retail/mcp-servers/dash_mcp_server" \
   --header 'Content-Type: application/json' \
   --header 'Accept: application/json' \
   --header "Authorization: Bearer <YOUR-PAT-TOKEN>" \
@@ -115,7 +131,7 @@ curl -X POST "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/data
   }'
 ```
 
-After running this command, you should see a Network policy failure.  If it was successful you would see a list of configured tools. 
+After running this command, you should see an error due to agent setup (expected) but it will give you an idea of how this will work in your environment. If it was successful you would see a list of configured tools. 
 
 The steps below are how you would test this in Cursor, but note that you should be able to use other clients like CrewAI, Claude by Anthropic, Devin by Cognition, and Agentforce by Salesforce.
 
@@ -129,7 +145,7 @@ In Cursor, open or create `mcp.json` located at the root of your project and add
 {
     "mcpServers": {
       "Snowflake MCP Server": {
-        "url": "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/databases/dash_mcp_db/schemas/data/mcp-servers/dash_mcp_server",
+        "url": "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/databases/dash_mcp_db/schemas/retail/mcp-servers/dash_mcp_server",
             "headers": {
               "Authorization": "Bearer <YOUR-PAT-TOKEN>"
             }
@@ -183,12 +199,12 @@ create or replace mcp server dash_mcp_server from specification
 $$
 tools:
   - name: "Finance & Risk Assessment Semantic View"
-    identifier: "DASH_DB_SI.DATA.FINANCIAL_SERVICES_ANALYTICS"
+    identifier: "DASH_DB_SI.RETAIL.FINANCIAL_SERVICES_ANALYTICS"
     type: "CORTEX_ANALYST_MESSAGE"
     description: "Comprehensive semantic model for financial services analytics, providing unified business definitions and relationships across customer data, transactions, marketing campaigns, support interactions, and risk assessments."
     title: "Financial And Risk Assessment"
   - name: "Support Tickets Cortex Search"
-    identifier: "DASH_DB_SI.DATA.SUPPORT_TICKETS"
+    identifier: "DASH_DB_SI.RETAIL.SUPPORT_TICKETS"
     type: "CORTEX_SEARCH_SERVICE_QUERY"
     description: "A tool that performs keyword and vector search over unstructured support tickets data."
     title: "Support Tickets Cortex Search"
