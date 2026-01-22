@@ -21,6 +21,7 @@ MCP Server on Snowflake simplifies the application architecture and eliminates t
 ### Prerequisites
 
 - Access to a Snowflake account with ACCOUNTADMIN role. If you do not have access to an account, create a [free Snowflake trial account](https://signup.snowflake.com/?utm_source=snowflake-devrel&utm_medium=developer-guides&utm_cta=developer-guides).
+- Have run through the Getting Started with Snowflake Intelligence HoL.
 - Access to [Cursor](https://cursor.com/) or equivalent MCP client (we will not test this today)
 
 ### What You Will Learn
@@ -35,10 +36,6 @@ A Snowflake MCP Server that intelligently responds to questions by reasoning ove
 ---
 
 ## Setup
-
-### Create Objects
-
- In Snowsight, [create a SQL Worksheet](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets-gs?_fsi=THrZMtDg,%20THrZMtDg&_fsi=THrZMtDg,%20THrZMtDg#create-worksheets-from-a-sql-file) and open [setup.sql](https://github.com/Snowflake-Labs/sfguide-getting-started-with-snowflake-mcp-server/blob/main/setup.sql) to execute all statements in order from top to bottom.
 
 ### Programmatic Access Token
 
@@ -109,12 +106,17 @@ CREATE OR REPLACE NETWORK POLICY allow_all_policy
 
 ALTER ACCOUNT SET NETWORK_POLICY = allow_all_policy;
 
-ALTER ACCOUNT UNSET NETWORK_POLICY;
-
 SHOW MCP SERVERS; 
 ```
 
 Before proceeding, test the connection using `curl` to make sure your account URL/MCP server endpoint and PAT are correct.
+
+To remove the Network policy please run the below.
+
+```sql
+
+ALTER ACCOUNT UNSET NETWORK_POLICY;
+```
 
 > **NOTE:** Replace `<YOUR-ORG-YOUR-ACCOUNT>` and `<YOUR-PAT-TOKEN>` with your values.  
 
@@ -131,7 +133,7 @@ curl -X POST "https://<YOUR-ORG-YOUR-ACCOUNT>.snowflakecomputing.com/api/v2/data
   }'
 ```
 
-After running this command, you should see an error due to agent setup (expected) but it will give you an idea of how this will work in your environment. If it was successful you would see a list of configured tools. 
+After running this command, you should see a list of configured tools. 
 
 The steps below are how you would test this in Cursor, but note that you should be able to use other clients like CrewAI, Claude by Anthropic, Devin by Cognition, and Agentforce by Salesforce.
 
@@ -259,6 +261,6 @@ Congratulations! You've successfully understood the steps to create a Snowflake 
 
 ---
 
-*Updated January 20, 2026*
+*Updated January 22, 2026*
 
 *This content is provided as is, and is not maintained on an ongoing basis. It may be out of date with current Snowflake instances.*

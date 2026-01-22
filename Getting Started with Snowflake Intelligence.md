@@ -38,8 +38,8 @@ An Enterprise Intelligence Agent - Snowflake Intelligence - that can respond to 
 
 ### Create database, schema, tables and load data from AWS S3
 
-- Download the "getting started SI setup.sql" .
-- In Snowsight, [create a SQL Worksheet](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets-gs?_fsi=THrZMtDg,%20THrZMtDg&_fsi=THrZMtDg,%20THrZMtDg#create-worksheets-from-a-sql-file), paste the content from [setup.sql](https://github.com/Snowflake-Labs/sfguide-getting-started-with-snowflake-intelligence/blob/main/setup.sql) (alternatively look at "getting started SI setup.sql"), click on the arrow beside the Run button and choose to "Run All".
+- Download the "getting started SI setup.sql" or use the link below to the setup.sql.
+- In Snowsight, [create a SQL Worksheet](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets-gs?_fsi=THrZMtDg,%20THrZMtDg&_fsi=THrZMtDg,%20THrZMtDg#create-worksheets-from-a-sql-file), paste the content from [setup.sql](https://github.com/Snowflake-Labs/sfguide-getting-started-with-snowflake-intelligence/blob/main/setup.sql) (alternatively look at "getting started SI setup.sql"), click on the arrow beside the Run button and choose to **"Run All"** (do not just click the play button).
 
 > **NOTE:** Switch your user role in Snowsight to **SNOWFLAKE_INTELLIGENCE_ADMIN**.
 
